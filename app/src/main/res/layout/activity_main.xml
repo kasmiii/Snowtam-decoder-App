@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sky_opacity"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/home_activity_welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="22dp"
+        android:text="Bienvenue a SNOWTAM Decoder !"
+        android:textColor="@color/colorWhite"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.171" />
+
+    <EditText
+        android:id="@+id/home_activity_secondCode_input"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/home_activity_firstCode_input"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/input_design"
+        android:hint="2nd code"
+        android:inputType="text"
+        android:maxLength="4"
+        android:padding="20dp"
+        android:textColor="@color/darkColor"
+        android:textColorHint="@color/darkColor"
+        android:textSize="19sp" />
+
+    <EditText
+        android:id="@+id/home_activity_thirdCode_input"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/home_activity_secondCode_input"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/input_design"
+        android:hint="3rd code"
+        android:inputType="text"
+        android:maxLength="4"
+        android:padding="20dp"
+        android:textColor="@color/darkColor"
+        android:textColorHint="@color/darkColor"
+        android:textSize="19sp" />
+
+
+    <EditText
+        android:id="@+id/home_activity_fourthCode_input"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/home_activity_thirdCode_input"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/input_design"
+        android:hint="4th code"
+        android:inputType="text"
+        android:maxLength="4"
+        android:padding="20dp"
+        android:textColor="@color/darkColor"
+        android:textColorHint="@color/darkColor"
+        android:textSize="19sp" />
+
+    <TextView
+        android:id="@+id/first_aeroplane_text"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/home_activity_welcome_text"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="41dp"
+        android:text="Aeroplane 1"
+        android:textColor="@color/colorWhite"
+        android:textSize="28dp" />
+
+    <EditText
+        android:id="@+id/home_activity_firstCode_input"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/home_activity_welcome_text"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/input_design"
+        android:hint="1st code"
+        android:inputType="text"
+        android:maxLength="4"
+        android:padding="20dp"
+        android:textColor="@color/darkColor"
+        android:textColorHint="@color/darkColor"
+        android:textSize="19sp" />
+
+    <TextView
+        android:id="@+id/second_aeroplane_text"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/first_aeroplane_text"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="49dp"
+        android:text="Aeroplane 2"
+        android:textColor="@color/colorWhite"
+        android:textSize="28dp" />
+
+    <TextView
+        android:id="@+id/third_aeroplane_text"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="49dp"
+        android:layout_below="@id/second_aeroplane_text"
+        android:text="Aeroplane 3"
+        android:textColor="@color/colorWhite"
+        android:textSize="28dp"
+        android:layout_marginLeft="15dp"
+        />
+
+    <TextView
+        android:id="@+id/fourth_aeroplane_text"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="49dp"
+        android:layout_below="@id/third_aeroplane_text"
+        android:text="Aeroplane 4"
+        android:textColor="@color/colorWhite"
+        android:textSize="28dp"
+        android:layout_marginLeft="15dp"
+        />
+
+    <Button
+        android:id="@+id/main_next_btn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/home_activity_fourthCode_input"
+
+        android:layout_marginLeft="230dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="14dp"
+        android:layout_marginTop="20dp"
+        android:padding="20dp"
+        android:text="Next >>"
+
+        android:background="@color/blueCustom"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    </RelativeLayout>
