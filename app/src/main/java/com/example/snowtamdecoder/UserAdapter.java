@@ -1,4 +1,5 @@
 /*
+
 package com.example.snowtamdecoder;
 
 import android.content.Context;
@@ -15,11 +16,11 @@ import java.util.List;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     public Context context;
-    public List<RetroUsers> retroUsers;
+    public List<SnowtamHash> snowtamHashList;
 
-    public UserAdapter(Context context,List<RetroUsers> retroUsers){
+    public UserAdapter(Context context,List<SnowtamHash> snowtamHashList){
         this.context=context;
-        this.retroUsers=retroUsers;
+        this.snowtamHashList=snowtamHashList;
     }
 
     @NonNull
@@ -32,7 +33,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull UserAdapter.ViewHolder holder, int position) {
 
-        holder.nameTextView.setText(this.retroUsers.get(position).getUser());
+        holder.nameTextView.setText(this.snowtamHashList.get(position).getUser());
 
     }
 
@@ -53,4 +54,5 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
 }
+
 */

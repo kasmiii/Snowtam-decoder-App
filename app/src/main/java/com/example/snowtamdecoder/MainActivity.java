@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,20 +28,23 @@ public class MainActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //getCodes();
-                Intent intent=new Intent(MainActivity.this,SnowtamCodesActivity.class);
-                startActivity(intent);
+                putCodes();
             }
         });
     }
 
-    public void getCodes(){
+    public void putCodes(){
         String getFirstCode=firstCode.getText().toString();
         String getSecondCode=secondCode.getText().toString();
         String getThirdCode=thirdCode.getText().toString();
         String getFourthCode=fourthCode.getText().toString();
-        Toast.makeText(this, getFirstCode+":"+getSecondCode+":"+getThirdCode+":"+getFourthCode, Toast.LENGTH_SHORT).show();
-        //Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+        System.out.println(getFirstCode+" "+getSecondCode+" "+getThirdCode+" "+getFourthCode);
+        Intent intent=new Intent(MainActivity.this,MenuActivity.class);
+        intent.putExtra("code1",getFirstCode);
+        intent.putExtra("code2",getSecondCode);
+        intent.putExtra("code3",getThirdCode);
+        intent.putExtra("code4",getFourthCode);
+        startActivity(intent);
     }
 
 
