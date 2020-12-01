@@ -2,26 +2,19 @@ package com.example.snowtamdecoder;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Adapter;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -76,6 +69,24 @@ public class MenuActivity extends AppCompatActivity {
                      }
         );
 
+        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
+        relativeLayout.setOnTouchListener(new OnSwipeTouchListener(MenuActivity.this) {
+            public void onSwipeTop() {
+                Toast.makeText(MenuActivity.this, "top", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeRight() {
+                Toast.makeText(MenuActivity.this, "right", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeLeft() {
+                Toast.makeText(MenuActivity.this, "left", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeBottom() {
+                Toast.makeText(MenuActivity.this, "bottom", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+       //findViewById(R.id.relativeLayout).set
     }
 
     @Override
@@ -149,7 +160,10 @@ public class MenuActivity extends AppCompatActivity {
                 indiceChar=snowtam.charAt(i-3);
             }
             //hashCodes.put(indiceChar+"",code);
-            listOfHases.add(new SnowtamHash(indiceChar+"",code,R.drawable.flight));
+            if(!code.equals("")){
+                listOfHases.add(new SnowtamHash(indiceChar+"",code,R.drawable.flight));
+            }
+
             //listOfString.add(code);
             i=step+2;//step+1
         }

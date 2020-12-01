@@ -33,7 +33,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CustomViewHolder> 
             super(itemView);
             myView = itemView;
             textViewCode=myView.findViewById(R.id.textView_code);
-            textViewValue=myView.findViewById(R.id.textView_code);
+            textViewValue=myView.findViewById(R.id.textView_value);
             imageViewFlag=myView.findViewById(R.id.imageView_flag);
         }
     }
