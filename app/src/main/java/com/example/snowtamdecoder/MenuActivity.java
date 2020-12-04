@@ -37,6 +37,9 @@ public class MenuActivity extends AppCompatActivity {
         Global.currentCode=this.code_1;
         GetDataSnotam serviceStream = RetrofitClientSnotam.getRetrofitInstance().create(GetDataSnotam.class);
 
+        if(Global.currentCode.equals("")||Global.currentCode==null){
+            Toast.makeText(MenuActivity.this, "code is null or empty", Toast.LENGTH_SHORT).show();
+        }
         //System.out.println("begin sending request to server...");
         Call<List<RetroSnowtam>> call = serviceStream.getStreams(Global.currentCode);
 
@@ -49,6 +52,7 @@ public class MenuActivity extends AppCompatActivity {
                                      Global.currentRetroSnowtam = retroSnowtam;
                                      Global.currentCode = Global.currentRetroSnowtam.getAll();
                                      hashList = getAllCodes(Global.currentCode);
+                                     Global.snowtamHashesGlobal=(ArrayList)hashList;
                                      //System.out.println("the hash Map result is::" + hashList.get(0));
                                         for (SnowtamHash snowtamHash:hashList){
                                             System.out.println(snowtamHash.toString()+"\n");
@@ -75,6 +79,8 @@ public class MenuActivity extends AppCompatActivity {
                 Toast.makeText(MenuActivity.this, "top", Toast.LENGTH_SHORT).show();
             }
             public void onSwipeRight() {
+                /*Intent intent=new Intent(MenuActivity.this,SnowtamDecodeActivity.class);
+                startActivity(intent);*/
                 Toast.makeText(MenuActivity.this, "right", Toast.LENGTH_SHORT).show();
             }
             public void onSwipeLeft() {
@@ -101,15 +107,21 @@ public class MenuActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.code_1:
+                Global.currentCode=this.code_1;
                 Toast.makeText(getApplicationContext(),this.code_1,Toast.LENGTH_LONG).show();
                 return true;
             case R.id.code_2:
+                Global.currentCode=this.code_2;
+                Intent intent=new Intent(MenuActivity.this,SnowtamDecodeActivity.class);
+                startActivity(intent);
                 Toast.makeText(getApplicationContext(),this.code_2,Toast.LENGTH_LONG).show();
                 return true;
             case R.id.code_3:
+                Global.currentCode=this.code_3;
                 Toast.makeText(getApplicationContext(),this.code_3,Toast.LENGTH_LONG).show();
                 return true;
             case R.id.code_4:
+                Global.currentCode=this.code_4;
                 Toast.makeText(getApplicationContext(),this.code_4,Toast.LENGTH_LONG).show();
                 return true;
             case R.id.home:
