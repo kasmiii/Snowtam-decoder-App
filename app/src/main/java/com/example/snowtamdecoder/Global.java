@@ -15,5 +15,7 @@ public class Global {
     public static HashMap<String,String> hashCodes;
     public static ArrayList<SnowtamHash> snowtamHashesGlobal;
     public static ArrayList<SnowtamDecode> listSnowtamsHash;
+    public static double longitude=151;
+    public static double latitude=-34;
 
 }

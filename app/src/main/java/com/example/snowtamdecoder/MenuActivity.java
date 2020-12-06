@@ -32,12 +32,31 @@ public class MenuActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
+        relativeLayout.setOnTouchListener(new OnSwipeTouchListener(MenuActivity.this) {
+            public void onSwipeTop() {
+                Toast.makeText(MenuActivity.this, "top", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeRight() {
+                /*Intent intent=new Intent(MenuActivity.this,SnowtamDecodeActivity.class);
+                startActivity(intent);*/
+                Toast.makeText(MenuActivity.this, "right", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeLeft() {
+                Toast.makeText(MenuActivity.this, "left", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeBottom() {
+                Toast.makeText(MenuActivity.this, "bottom", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
         //my new added code...
         getCodes();
         Global.currentCode=this.code_1;
         GetDataSnotam serviceStream = RetrofitClientSnotam.getRetrofitInstance().create(GetDataSnotam.class);
 
-        if(Global.currentCode.equals("")||Global.currentCode==null){
+        if(Global.currentCode.equals("") || Global.currentCode==null){
             Toast.makeText(MenuActivity.this, "code is null or empty", Toast.LENGTH_SHORT).show();
         }
         //System.out.println("begin sending request to server...");
@@ -57,7 +76,6 @@ public class MenuActivity extends AppCompatActivity {
                                         for (SnowtamHash snowtamHash:hashList){
                                             System.out.println(snowtamHash.toString()+"\n");
                                         }
-
                                      listView=findViewById(R.id.list_codes);
                                      listView.setLayoutManager(new LinearLayoutManager(MenuActivity.this, RecyclerView.VERTICAL,false));
                                      MyAdapter codeAdapter=new MyAdapter(MenuActivity.this,hashList);//,HomeActivity.this);
@@ -73,24 +91,7 @@ public class MenuActivity extends AppCompatActivity {
                      }
         );
 
-        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
-        relativeLayout.setOnTouchListener(new OnSwipeTouchListener(MenuActivity.this) {
-            public void onSwipeTop() {
-                Toast.makeText(MenuActivity.this, "top", Toast.LENGTH_SHORT).show();
-            }
-            public void onSwipeRight() {
-                /*Intent intent=new Intent(MenuActivity.this,SnowtamDecodeActivity.class);
-                startActivity(intent);*/
-                Toast.makeText(MenuActivity.this, "right", Toast.LENGTH_SHORT).show();
-            }
-            public void onSwipeLeft() {
-                Toast.makeText(MenuActivity.this, "left", Toast.LENGTH_SHORT).show();
-            }
-            public void onSwipeBottom() {
-                Toast.makeText(MenuActivity.this, "bottom", Toast.LENGTH_SHORT).show();
-            }
 
-        });
 
        //findViewById(R.id.relativeLayout).set
     }
@@ -112,7 +113,7 @@ public class MenuActivity extends AppCompatActivity {
                 return true;
             case R.id.code_2:
                 Global.currentCode=this.code_2;
-                Intent intent=new Intent(MenuActivity.this,SnowtamDecodeActivity.class);
+                Intent intent=new Intent(MenuActivity.this,MapsActivity.class);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(),this.code_2,Toast.LENGTH_LONG).show();
                 return true;
