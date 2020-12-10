@@ -45,19 +45,16 @@ public class MenuActivity extends AppCompatActivity {
             public void onSwipeRight() {
                 Intent intent=new Intent(MenuActivity.this,MainActivity.class);
                 startActivity(intent);
-                Toast.makeText(MenuActivity.this, "right", Toast.LENGTH_SHORT).show();
             }
             public void onSwipeLeft() {
                 Intent intent=new Intent(MenuActivity.this,SnowtamDecodeActivity.class);
                 startActivity(intent);
-                Toast.makeText(MenuActivity.this, "left", Toast.LENGTH_SHORT).show();
             }
             public void onSwipeBottom() {
                 //Toast.makeText(MenuActivity.this, "bottom", Toast.LENGTH_SHORT).show();
             }
 
         });
-
     }
 
     @Override
@@ -76,22 +73,17 @@ public class MenuActivity extends AppCompatActivity {
                 processData(Global.currentCode);
                 return true;
             case R.id.code_2:
-
-                //if(Global.currentCode!=this.code_2){
                     Global.currentCode=this.code_2;
                     processData(Global.currentCode);
                 return true;
             case R.id.code_3:
-                //if(Global.currentCode!=this.code_3){
                     Global.currentCode=this.code_3;
                     processData(Global.currentCode);
-                //}
+
                 return true;
             case R.id.code_4:
-                //if(Global.currentCode!=this.code_4){
                     Global.currentCode=this.code_4;
                     processData(Global.currentCode);
-                //}
                 return true;
             case R.id.home:
                 Intent intent=new Intent(MenuActivity.this,MainActivity.class);
@@ -167,13 +159,11 @@ public class MenuActivity extends AppCompatActivity {
                                      Global.snowtamHashesGlobal=hashList;
                                      MyAdapter codeAdapter=new MyAdapter(MenuActivity.this,hashList);//,HomeActivity.this);
                                      listView.setAdapter(codeAdapter);
-                                     //break;
                                  }
                              }
                          }
                          @Override
                          public void onFailure(Call<List<RetroSnowtam>> call, Throwable t) {
-                             //System.out.println("error during requesting server ! verify first that the code is valid...");
                              Toast.makeText(MenuActivity.this, "error during requesting server ! verify first that the code is valid...", Toast.LENGTH_SHORT).show();
                          }
                      }

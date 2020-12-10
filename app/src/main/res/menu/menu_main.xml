@@ -1,17 +1,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     tools:context="example.javatpoint.com.optionmenu.MainActivity">
 
     <item  android:id="@+id/code_1"
+        android:icon="@drawable/plane"
         android:title="Aerodrome 1"/>
     <item  android:id="@+id/code_2"
+        android:icon="@drawable/plane"
         android:title="Aerodrome 2"/>
     <item  android:id="@+id/code_3"
+        android:icon="@drawable/plane"
         android:title="Aerodrome 3"/>
     <item  android:id="@+id/code_4"
+        android:icon="@drawable/plane"
         android:title="Aerodrome 4"/>
     <item  android:id="@+id/home_item"
+        android:icon="@drawable/home"
         android:title="Home"
         app:showAsAction="withText"/>
 </menu>
