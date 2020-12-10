@@ -18,38 +18,30 @@ public class SnowtamDecodeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_snowtam_decode);
 
-        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.list_info_decodes);
-        relativeLayout.setOnTouchListener(new OnSwipeTouchListener(SnowtamDecodeActivity.this) {
-            public void onSwipeTop() {
-                //Toast.makeText(MenuActivity.this, "top", Toast.LENGTH_SHORT).show();
-            }
-            public void onSwipeRight() {
-                Intent intent=new Intent(SnowtamDecodeActivity.this,MenuActivity.class);
-                startActivity(intent);
-                //Toast.makeText(MenuActivity.this, "right", Toast.LENGTH_SHORT).show();
-            }
-            public void onSwipeLeft() {
-                Intent intent=new Intent(SnowtamDecodeActivity.this,MapsActivity.class);
-                startActivity(intent);
-                //Toast.makeText(MenuActivity.this, "left", Toast.LENGTH_SHORT).show();
-            }
-            public void onSwipeBottom() {
-
-                //Toast.makeText(MenuActivity.this, "bottom", Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
         listSnowtamsDecode=getListOfCodesInfos();
         //decodeSnowtams()
         listViewDecode=findViewById(R.id.list_info_decodes);
         listViewDecode.setLayoutManager(new LinearLayoutManager(SnowtamDecodeActivity.this, RecyclerView.VERTICAL,false));
         MyAdapterDecoder codeAdapterDecoder=new MyAdapterDecoder(SnowtamDecodeActivity.this,listSnowtamsDecode);//,HomeActivity.this);
         listViewDecode.setAdapter(codeAdapterDecoder);
-        //decodeSnowtams();
-    }
+        listViewDecode.setOnTouchListener(new OnSwipeTouchListener(SnowtamDecodeActivity.this) {
+            public void onSwipeTop() {
+                //Toast.makeText(MenuActivity.this, "top", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeRight() {
+                Intent intent1=new Intent(SnowtamDecodeActivity.this,MenuActivity.class);
+                startActivity(intent1);
+            }
+            public void onSwipeLeft() {
+                Intent intent=new Intent(SnowtamDecodeActivity.this,MapsActivity.class);
+                startActivity(intent);
+            }
+            public void onSwipeBottom() {
 
-    // Decodage Functions...
+            }
+
+        });
+    }
 
     public String decodeB(String str){
         String result="";
@@ -231,34 +223,28 @@ public class SnowtamDecodeActivity extends AppCompatActivity {
     }
 
 
-
-
-    public void decodeSnowtams(){
-        //.........
-    }
-
     public ArrayList<SnowtamDecode> getListOfCodesInfos(){
         ArrayList<SnowtamDecode> snowtamDecodeArrayList=new ArrayList<>();
         String valeur_decode="";
         for (SnowtamHash snowtamHash:Global.snowtamHashesGlobal){
             System.out.println("snowtam Letter::"+snowtamHash.getCode());
             switch(snowtamHash.getCode()){
-                case "A":
-                    valeur_decode=snowtamHash.getValue()+"";
+                case 'A'+"":
+                    valeur_decode="Aeroport "+Global.aerodromeInfo.getAirportName();
                     break;
-                case "B":
+                case 'B'+"":
                     valeur_decode=decodeB(snowtamHash.getValue());
                     break;
-                case  "C":
+                case  'C'+"":
                     valeur_decode=decodeC(snowtamHash.getValue());
                     break;
-                case  "D":
+                case  'D'+"":
                     valeur_decode=decodeD(snowtamHash.getValue());
                     break;
-                case  "E":
+                case  'E'+"":
                     valeur_decode=decodeE(snowtamHash.getValue());
                     break;
-                case  "F":
+                case  'F'+"":
                     valeur_decode=decodeF(snowtamHash.getValue());
                     break;
                 default:
@@ -267,9 +253,9 @@ public class SnowtamDecodeActivity extends AppCompatActivity {
             snowtamDecodeArrayList.add(new SnowtamDecode(snowtamHash.getValue(),valeur_decode,R.drawable.information));
         }
 
-       /* for (SnowtamDecode snowtamDecode:snowtamDecodeArrayList){
-            System.out.println();
-        }*/
+        for (SnowtamDecode snowtamDecode:snowtamDecodeArrayList){
+            System.out.println("decodegae:: "+snowtamDecode.getInfoDecode());
+        }
         return snowtamDecodeArrayList;
     }
 

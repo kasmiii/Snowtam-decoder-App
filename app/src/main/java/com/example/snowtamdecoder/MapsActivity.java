@@ -2,7 +2,9 @@ package com.example.snowtamdecoder;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +51,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         mapFragment.getMapAsync(this);
+
+        RelativeLayout relativeLayout=this.findViewById(R.id.map_relative_layout);
+        relativeLayout.setOnTouchListener(new OnSwipeTouchListener(MapsActivity.this) {
+            public void onSwipeTop() {
+                //Toast.makeText(MapActivity.this, "top", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeRight() {
+                Intent intent=new Intent(MapsActivity.this,SnowtamDecodeActivity.class);
+                startActivity(intent);
+                //Toast.makeText(MapsActivity.this, "right", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeLeft() {
+                //Intent intent=new Intent(MapsActivity.this,SnowtamDecodeActivity.class);
+                //startActivity(intent);
+                //Toast.makeText(MapActivity.this, "left", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeBottom() {
+                //Toast.makeText(MenuActivity.this, "bottom", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
     }
 
 

@@ -21,9 +21,9 @@ import retrofit2.Response;
 public class MenuActivity extends AppCompatActivity {
 
     public String code_1,code_2,code_3,code_4;
-    public List<SnowtamHash> hashList;
+    public ArrayList<SnowtamHash> hashList;
     public RecyclerView listView;
-    RelativeLayout relativeLayout;
+    RelativeLayout recyclerViewTouch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +32,13 @@ public class MenuActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        relativeLayout = findViewById(R.id.relativeLayout);
-        relativeLayout.setOnTouchListener(new OnSwipeTouchListener(MenuActivity.this) {
+        listView=findViewById(R.id.list_codes);
+        listView.setLayoutManager(new LinearLayoutManager(MenuActivity.this, RecyclerView.VERTICAL,false));
+        getCodes();
+        Global.currentCode=this.code_1;
+        processData(Global.currentCode);
+
+        listView.setOnTouchListener(new OnSwipeTouchListener(MenuActivity.this) {
             public void onSwipeTop() {
                 //Toast.makeText(MenuActivity.this, "top", Toast.LENGTH_SHORT).show();
             }
@@ -53,12 +58,6 @@ public class MenuActivity extends AppCompatActivity {
 
         });
 
-        listView=findViewById(R.id.list_codes);
-        listView.setLayoutManager(new LinearLayoutManager(MenuActivity.this, RecyclerView.VERTICAL,false));
-        //my new added code...
-        getCodes();
-        Global.currentCode=this.code_1;
-        processData(Global.currentCode);
     }
 
     @Override
@@ -73,25 +72,14 @@ public class MenuActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.code_1:
-                //if(Global.currentCode!=this.code_1){
-                    Global.currentCode=this.code_1;
-                    //getAerodromeInformation();
-                    //processData(Global.currentCode);
-                    Intent intent1=new Intent(MenuActivity.this,SnowtamDecodeActivity.class);
-                    startActivity(intent1);
-                //}
-
-                //Toast.makeText(getApplicationContext(),this.code_1,Toast.LENGTH_LONG).show();
+                Global.currentCode=this.code_1;
+                processData(Global.currentCode);
                 return true;
             case R.id.code_2:
 
                 //if(Global.currentCode!=this.code_2){
                     Global.currentCode=this.code_2;
                     processData(Global.currentCode);
-                //}
-                /*Intent intent=new Intent(MenuActivity.this,MapsActivity.class);
-                startActivity(intent);
-                Toast.makeText(getApplicationContext(),this.code_2,Toast.LENGTH_LONG).show();*/
                 return true;
             case R.id.code_3:
                 //if(Global.currentCode!=this.code_3){
@@ -108,7 +96,6 @@ public class MenuActivity extends AppCompatActivity {
             case R.id.home:
                 Intent intent=new Intent(MenuActivity.this,MainActivity.class);
                 startActivity(intent);
-                //Toast.makeText(getApplicationContext(),"Item home Selected",Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -123,9 +110,9 @@ public class MenuActivity extends AppCompatActivity {
         this.code_4=intent.getStringExtra("code4");
     }
 
-    public List<SnowtamHash> getAllCodes(String str){
+    public ArrayList<SnowtamHash> getAllCodes(String str){
 
-        List<SnowtamHash> listOfHases=new ArrayList<SnowtamHash>();
+        ArrayList<SnowtamHash> listOfHases=new ArrayList<SnowtamHash>();
         int beginIndex=str.indexOf(')');
         int begin=beginIndex-2;
         int limitIndex=str.indexOf(".)\nCREATED");
@@ -163,7 +150,7 @@ public class MenuActivity extends AppCompatActivity {
     public void processData(String codeAerodrome){
         GetDataSnotam serviceStream = RetrofitClientSnotam.getRetrofitInstance().create(GetDataSnotam.class);
 
-        if(codeAerodrome.equals("") || codeAerodrome==null){
+        if(codeAerodrome==null){
             Toast.makeText(MenuActivity.this, "code is null or empty", Toast.LENGTH_SHORT).show();
         }
         Call<List<RetroSnowtam>> call = serviceStream.getStreams(codeAerodrome);
@@ -177,13 +164,10 @@ public class MenuActivity extends AppCompatActivity {
                                      Global.currentRetroSnowtam = retroSnowtam;
                                      Global.currentSnowtam = Global.currentRetroSnowtam.getAll();
                                      hashList = getAllCodes(Global.currentSnowtam);
-                                     Global.snowtamHashesGlobal=(ArrayList)hashList;
-
-                                     for (SnowtamHash snowtamHash:hashList){
-                                         System.out.println(snowtamHash.toString()+"\n");
-                                     }
+                                     Global.snowtamHashesGlobal=hashList;
                                      MyAdapter codeAdapter=new MyAdapter(MenuActivity.this,hashList);//,HomeActivity.this);
                                      listView.setAdapter(codeAdapter);
+                                     //break;
                                  }
                              }
                          }
@@ -201,7 +185,6 @@ public class MenuActivity extends AppCompatActivity {
 
         GetDataSnotam serviceStream = RetrofitClientSnotam.getRetrofitInstance().create(GetDataSnotam.class);
 
-        //System.out.println("begin sending request to server...");
         Call<List<AerodromeInformation>> call = serviceStream.getAerodromeInformation(Global.currentCode);
 
         call.enqueue(new Callback<List<AerodromeInformation>>() {
@@ -216,7 +199,6 @@ public class MenuActivity extends AppCompatActivity {
                          }
                      }
         );
-        //return aerodromeInformation;
     }
 
 }
