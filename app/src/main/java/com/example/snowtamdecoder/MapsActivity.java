@@ -3,6 +3,8 @@ package com.example.snowtamdecoder;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -11,38 +13,76 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    public TextView longitude;
+    public TextView latitude;
+    public TextView aerodromeName;
+    public TextView pays;
+    public String longitudeText,latitudeText,aerodromeNameText,paysText;
     private GoogleMap mMap;
+    public AerodromeInformation aerodromeInformation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //getAerodromeInformation();
         setContentView(R.layout.activity_maps);
+        longitude=this.findViewById(R.id.map_activity_longitude_text);
+        latitude=this.findViewById(R.id.map_activity_latitude_text);
+        aerodromeName=this.findViewById(R.id.map_activity_aerodrome_name_text);
+        pays=this.findViewById(R.id.nom_pays_activity_text_value);
+        longitude.setText(Double.toString(Global.aerodromeInfo.getLongitude()));
+        latitude.setText(Double.toString(Global.aerodromeInfo.getLatitude()));
+        aerodromeName.setText(Global.aerodromeInfo.getAirportName());
+        pays.setText(Global.aerodromeInfo.getCountryName());
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+
+
         mapFragment.getMapAsync(this);
     }
 
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(Global.latitude, Global.longitude);
+        LatLng sydney = new LatLng(Global.aerodromeInfo.getLatitude(), Global.aerodromeInfo.getLongitude());
 
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Aerodrome"));
+        mMap.addMarker(new MarkerOptions().position(sydney).title(Global.aerodromeInfo.getAirportName()));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
+
+    public void getAerodromeInformation(){
+
+        GetDataSnotam serviceStream = RetrofitClientSnotam.getRetrofitInstance().create(GetDataSnotam.class);
+
+        //System.out.println("begin sending request to server...");
+        Call<List<AerodromeInformation>> call = serviceStream.getAerodromeInformation(Global.currentCode);
+
+        call.enqueue(new Callback<List<AerodromeInformation>>() {
+                         @Override
+                         public void onResponse(Call<List<AerodromeInformation>> call, Response<List<AerodromeInformation>> response) {
+                             aerodromeInformation=response.body().get(0);
+                             System.out.println(aerodromeInformation);
+                         }
+                         @Override
+                         public void onFailure(Call<List<AerodromeInformation>> call, Throwable t) {
+                             Toast.makeText(MapsActivity.this, "error during requesting server geolocalisation ! verify first that the code is valid...", Toast.LENGTH_SHORT).show();
+                         }
+                     }
+        );
+        //return aerodromeInformation;
+    }
+
 }
