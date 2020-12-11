@@ -96,6 +96,6 @@
     <string name="code_3">%1$s</string>
     <string name="code_4">%1$s</string>
     <string name="title_activity_snowtam">SnowtamActivity</string>
-    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_menu">selection aeroport</string>
     <string name="title_activity_maps">Map</string>
 </resources>
