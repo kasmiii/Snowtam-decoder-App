@@ -35,7 +35,7 @@ public class MenuActivity extends AppCompatActivity {
         listView=findViewById(R.id.list_codes);
         listView.setLayoutManager(new LinearLayoutManager(MenuActivity.this, RecyclerView.VERTICAL,false));
         getCodes();
-        Global.currentCode=this.code_1;
+        Global.currentCode=Global.code1;
         processData(Global.currentCode);
 
         listView.setOnTouchListener(new OnSwipeTouchListener(MenuActivity.this) {
@@ -69,20 +69,20 @@ public class MenuActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.code_1:
-                Global.currentCode=this.code_1;
+                Global.currentCode=Global.code1;
                 processData(Global.currentCode);
                 return true;
             case R.id.code_2:
-                    Global.currentCode=this.code_2;
+                    Global.currentCode=Global.code2;
                     processData(Global.currentCode);
                 return true;
             case R.id.code_3:
-                    Global.currentCode=this.code_3;
+                    Global.currentCode=Global.code3;
                     processData(Global.currentCode);
 
                 return true;
             case R.id.code_4:
-                    Global.currentCode=this.code_4;
+                    Global.currentCode=Global.code4;
                     processData(Global.currentCode);
                 return true;
             case R.id.home:
@@ -96,10 +96,10 @@ public class MenuActivity extends AppCompatActivity {
 
     public void getCodes(){
         Intent intent = getIntent();
-        this.code_1=intent.getStringExtra("code1");
-        this.code_2=intent.getStringExtra("code2");
-        this.code_3=intent.getStringExtra("code3");
-        this.code_4=intent.getStringExtra("code4");
+        Global.code1=intent.getStringExtra("code1");
+        Global.code2=intent.getStringExtra("code2");
+        Global.code3=intent.getStringExtra("code3");
+        Global.code4=intent.getStringExtra("code4");
     }
 
     public ArrayList<SnowtamHash> getAllCodes(String str){
